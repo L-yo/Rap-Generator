@@ -7,10 +7,13 @@
 
 import lyricsgenius as genius
 import os 
-geniusCreds = "3Uwh10E3D5poEL5-0rDbLiCKWayTs8sS8fSF0IE6CM5aA4SysSQPMSb0A5LSIGGi"
-artist_name = "Spider Zed"
+from os import path
 
-os.mkdir("Lyrics/"+artist_name)
+geniusCreds = "3Uwh10E3D5poEL5-0rDbLiCKWayTs8sS8fSF0IE6CM5aA4SysSQPMSb0A5LSIGGi"
+artist_name = "Bigflo"
+
+if not path.exists("Lyrics/"+artist_name):
+    os.mkdir("Lyrics/"+artist_name)
 
 #Connect your credentials and chosen artist to the genius object then test the first 5 songs
 api = genius.Genius(geniusCreds)
