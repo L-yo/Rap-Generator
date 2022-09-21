@@ -8,7 +8,7 @@
 import lyricsgenius as genius
 import os 
 geniusCreds = "3Uwh10E3D5poEL5-0rDbLiCKWayTs8sS8fSF0IE6CM5aA4SysSQPMSb0A5LSIGGi"
-artist_name = "Alkapote"
+artist_name = "Spider Zed"
 
 os.mkdir("Lyrics/"+artist_name)
 
@@ -20,9 +20,3 @@ for song in artist.songs:
     with open("Lyrics/"+artist_name+'/'+song.title+'.txt', 'w') as f:
         f.write(song.lyrics)
     f.close()
-
-# import pandas as pd
-# Artist=pd.read_json("Lyrics_"+artist_name+".json")
-
-# Artist['songs']
-# Artist['songs'][5]['lyrics']
