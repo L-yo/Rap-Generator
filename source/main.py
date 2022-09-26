@@ -6,7 +6,7 @@ from os import path
 
 def french_rapper_to_csv():
     # EXECUTE FRENCH_RAPPER QUERY ON WIKIDATA AND CONVERT RESULTS TO DATAFRAME AND CSV
-    results = scrapping.query_wikidata("source/french_rapper.sparql")
+    results = scrapping.query_wikidata("source/queries/french_rapper.sparql")
 
     df = pd.DataFrame(columns=['uri', 'name'])
     d = []
