@@ -20,8 +20,8 @@ def connect_genius_api():
         if line.split(':')[0] == "Access token ":
             geniusCreds = line.split(':')[1]
 
-    api = genius.API(geniusCreds)
-    gen = genius.Genius(geniusCreds)
+    api = genius.API(geniusCreds, timeout=30)
+    gen = genius.Genius(geniusCreds, timeout=30)
 
     return api, gen
 
