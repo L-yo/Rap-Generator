@@ -18,7 +18,10 @@ def french_rapper_to_csv():
         d.append(
             {
                 'uri': rapper['rapper']['value'],
-                'name': rapper['name']['value']#.lower()
+                'name': rapper['name']['value'],#.lower()
+                'label': rapper['label']['value'],
+                #'genius_id': rapper['genius_id']['value'],
+                'description': rapper['description']['value'],
             }
         )
 
@@ -42,23 +45,26 @@ def get_songs(artist_name, genius, retries=0):
         print("Timeout, retrying again ("+retries+")")
         get_songs(artist_name, genius, retries)
 
-
-    for song in songs:
-            print(song.title)
-            with open("data/Lyrics/"+artist_name+'/'+song.title+'.txt', 'w') as f:
-                f.write(song.lyrics)
-            f.close()
+    if songs:
+        for song in songs:
+                title = song.title
+                title = title.replace('_', '')
+                title = title.replace('/', '-')
+                with open("data/Lyrics/"+artist_name+'/'+title+'.txt', 'w') as f:
+                    f.write(song.lyrics)
+                f.close()
 
 def create_dataset(genius, french_rappers):
     print("Creating the dataset...")
     rappers = pd.read_csv(french_rappers)
-    total = rappers['name'].size
+    total = rappers['label'].size
     i = 1
-    for rapper in rappers["name"]:
-        print(rapper + ' ' + str(i) + '/' + str(total))
+    for rapper in rappers["label"]:
+        print('\n'+rapper + ' ' + str(i) + '/' + str(total))
         if not path.exists("data/Lyrics/"+rapper):
             os.mkdir("data/Lyrics/"+rapper)
         get_songs(rapper, genius)
+        i+=1
     
 api, genius = connect_genius_api()
 

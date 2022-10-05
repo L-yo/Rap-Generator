@@ -1,3 +1,4 @@
+from genericpath import exists
 from SPARQLWrapper import SPARQLWrapper, JSON
 import pandas as pd
 import lyricsgenius as genius
@@ -37,5 +38,6 @@ def get_songs_of(artist_name, api):
     
     #song.title
     #song.lyrics
-    return artist.songs
+    if artist:
+        return artist.songs
 
