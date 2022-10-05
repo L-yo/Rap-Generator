@@ -1,0 +1,11 @@
+SELECT DISTINCT ?rapper ?name 
+{
+  ?rapper wdt:P106 wd:Q2252262 .
+  ?rapper wdt:P742 ?name .
+  ?rapper wdt:P1412 wd:Q150 .
+  
+  SERVICE wikibase:label { #BabelRainbow
+    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],fr,ar,be,bg,bn,ca,cs,da,de,el,en,es,et,fa,fi,he,hi,hu,hy,id,it,ja,jv,ko,nb,nl,eo,pa,pl,pt,ro,ru,sh,sk,sr,sv,sw,te,th,tr,uk,yue,vec,vi,zh"
+  }
+}
+ORDER BY ?name
