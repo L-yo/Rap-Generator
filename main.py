@@ -48,7 +48,7 @@ def get_songs(artist_name, genius, retries=0):
     if songs:
         for song in songs:
                 title = song.title
-                title = title.replace('_', '')
+                title = title.replace(' ', '_')
                 title = title.replace('/', '-')
                 with open("data/Lyrics/"+artist_name+'/'+title+'.txt', 'w') as f:
                     f.write(song.lyrics)
