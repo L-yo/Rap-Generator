@@ -2,6 +2,7 @@ from genericpath import exists
 from SPARQLWrapper import SPARQLWrapper, JSON
 import pandas as pd
 import lyricsgenius as genius
+from difflib import SequenceMatcher
 
 def query_wikidata(query_name):
     sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
@@ -35,9 +36,9 @@ def get_featuring_artists(song_name, api):
 def get_songs_of(artist_name, api):
     #Connect your credentials and chosen artist to the genius object then test the first 5 songs
     artist = api.search_artist(artist_name, max_songs=5)
-    
-    #song.title
-    #song.lyrics
-    if artist:
+
+    ratio = SequenceMatcher(None, artist_name, artist.name).ratio()
+
+    if artist and ratio > 0.5:
         return artist.songs
 

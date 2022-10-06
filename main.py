@@ -53,6 +53,8 @@ def get_songs(artist_name, genius, retries=0):
                 with open("data/Lyrics/"+artist_name+'/'+title+'.txt', 'w') as f:
                     f.write(song.lyrics)
                 f.close()
+    else:
+        print("Artist or songs not found, sorry")
 
 def create_dataset(genius, french_rappers):
     print("Creating the dataset...")
@@ -69,8 +71,8 @@ def create_dataset(genius, french_rappers):
 api, genius = connect_genius_api()
 
 
-# utils.clean_data()
-# french_rapper_to_csv()
+utils.clean_data()
+french_rapper_to_csv()
 
 create_dataset(genius, "data/french_rappers.csv")
 
@@ -84,5 +86,4 @@ create_dataset(genius, "data/french_rappers.csv")
 # artist_name = "Gringe"
 # song_name = "qui dit mieux"
 # get_feats(song_name +' '+artist_name, api)
-
 
