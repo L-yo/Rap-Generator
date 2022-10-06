@@ -1,4 +1,8 @@
-SELECT DISTINCT ?rapper ?name ?label ?genius_id ?description
+SELECT DISTINCT ?rapper 
+                (GROUP_CONCAT(DISTINCT ?name; SEPARATOR="/ ") AS ?names) 
+                (GROUP_CONCAT(DISTINCT ?label; SEPARATOR="/ ") AS ?labels) 
+                #(GROUP_CONCAT(DISTINCT ?genius_id; SEPARATOR="/ ") AS ?genius_ids)
+                #(GROUP_CONCAT(DISTINCT ?description; SEPARATOR="/ ") AS ?descriptions)
 {
   VALUES ?citizenship {wd:Q142 wd:Q31 wd:Q39}
   ?rapper wdt:P106 wd:Q2252262 .
@@ -16,5 +20,7 @@ SELECT DISTINCT ?rapper ?name ?label ?genius_id ?description
   }
   FILTER (lang(?label) = 'fr')
   FILTER (lang(?description) = 'en')
+  
 }
-ORDER BY ?name
+GROUP BY ?rapper
+ORDER BY ?labels

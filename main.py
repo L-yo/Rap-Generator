@@ -18,10 +18,10 @@ def french_rapper_to_csv():
         d.append(
             {
                 'uri': rapper['rapper']['value'],
-                'name': rapper['name']['value'],#.lower()
-                'label': rapper['label']['value'],
+                #'names': rapper['names']['value'],#.lower()
+                'labels': rapper['labels']['value'],
                 #'genius_id': rapper['genius_id']['value'],
-                'description': rapper['description']['value'],
+                #'descriptions': rapper['descriptions']['value'],
             }
         )
 
@@ -59,9 +59,9 @@ def get_songs(artist_name, genius, retries=0):
 def create_dataset(genius, french_rappers):
     print("Creating the dataset...")
     rappers = pd.read_csv(french_rappers)
-    total = rappers['label'].size
+    total = rappers['labels'].size
     i = 1
-    for rapper in rappers["label"]:
+    for rapper in rappers["labels"]:
         print('\n'+rapper + ' ' + str(i) + '/' + str(total))
         if not path.exists("data/Lyrics/"+rapper):
             os.mkdir("data/Lyrics/"+rapper)
