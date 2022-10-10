@@ -7,6 +7,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.neighbors import KNeighborsClassifier
 
 # nltk.download('punkt')
 
@@ -14,6 +15,7 @@ LYRICS_FOLDER = "data/Lyrics"
 
 # Columns = ['Artist', 'SongName', 'Lyrics']
 df_songs = songs_organisers(LYRICS_FOLDER)
+n_songs = len(df_songs)
 
 # Data Cleaning
 lyrics_list = np.squeeze(df_songs[["Lyrics"]].to_numpy())
@@ -31,3 +33,10 @@ print(Lyrics_transformed[0].toarray())
 Emb_lyrics = Lyrics_transformed.toarray()
 print(Emb_lyrics)
 # Building Model
+
+y=np.zeros(n_songs)
+model = KNeighborsClassifier()
+
+model.fit(Emb_lyrics, y)
+
+print(model.predict([Emb_lyrics[0]]))
