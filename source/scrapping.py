@@ -37,7 +37,9 @@ def get_songs_of(artist_name, api):
     #Connect your credentials and chosen artist to the genius object then test the first 5 songs
     artist = api.search_artist(artist_name, max_songs=5)
 
-    ratio = SequenceMatcher(None, artist_name, artist.name).ratio()
+    if str(type(artist)) != "<class 'NoneType'>" :
+        ratio = SequenceMatcher(None, artist_name, artist.name).ratio()
+
 
     if artist and ratio > 0.5:
         return artist.songs
