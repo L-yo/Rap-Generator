@@ -6,6 +6,8 @@ def clean_data():
     if os.path.exists("data/Lyrics"):
         shutil.rmtree("data/Lyrics")
         os.mkdir("data/Lyrics")
+        os.mkdir("data/Lyrics/Rap")
+        os.mkdir("data/Lyrics/PaRap")
 
     if os.path.exists("data/french_rapper.csv"):
         os.remove("data/french_rapper.csv")
