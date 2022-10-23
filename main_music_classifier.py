@@ -1,5 +1,5 @@
 from numpy import vectorize
-from source.data_manipulation import songs_organisers
+from source.data_manipulation import songs_organisers, text_cleaning
 
 import numpy as np
 
@@ -17,6 +17,8 @@ LYRICS_FOLDER = "data/Lyrics"
 df_songs = songs_organisers(LYRICS_FOLDER)
 n_songs = len(df_songs)
 
+df_songs["Lyrics"] = df_songs["Lyrics"].apply(text_cleaning)
+
 # Data Cleaning
 lyrics_list = np.squeeze(df_songs[["Lyrics"]].to_numpy())
 
@@ -24,14 +26,16 @@ lyrics_list = np.squeeze(df_songs[["Lyrics"]].to_numpy())
 vectorizer = TfidfVectorizer()
 Lyrics_transformed = vectorizer.fit_transform(lyrics_list)
 
+# Nombre de mots totaux
 print(len(vectorizer.get_feature_names_out()))
 print(Lyrics_transformed.shape)
-print(Lyrics_transformed[0].shape)
-print(Lyrics_transformed[0])
-print(Lyrics_transformed[0].toarray())
+# print(Lyrics_transformed[0].shape)
+# print(Lyrics_transformed[0])
+# print(Lyrics_transformed[0].toarray())
 
 Emb_lyrics = Lyrics_transformed.toarray()
-print(Emb_lyrics)
+
+# print(Emb_lyrics)
 # Building Model
 
 y=np.zeros(n_songs)
@@ -39,4 +43,4 @@ model = KNeighborsClassifier()
 
 model.fit(Emb_lyrics, y)
 
-print(model.predict([Emb_lyrics[0]]))
+# print(model.predict([Emb_lyrics[0]]))
