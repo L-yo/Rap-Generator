@@ -1,6 +1,14 @@
 import os
 import pandas as pd
 import re
+
+import unidecode
+import nltk
+from nltk.corpus import stopwords
+
+# nltk.download('stopwords')
+stop_words = set(stopwords.words('french')) 
+
 def songs_organisers(folder_artists_path):
     
     df_lyrics = pd.DataFrame(columns=['Artist', 'SongName', 'Lyrics'])
@@ -32,4 +40,9 @@ def text_cleaning(lyrics):
     lyrics = lyrics.replace("  ", " ")
     lyrics = lyrics.replace("  ", " ")
     lyrics = lyrics.lower()
+    lyrics = unidecode.unidecode(lyrics)
+    lyrics = nltk.word_tokenize(lyrics)
+    lyrics = [word for word in lyrics if not word in stop_words]
+    
+    lyrics = " ".join(word for word in lyrics)
     return lyrics
