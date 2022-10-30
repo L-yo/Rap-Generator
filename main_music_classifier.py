@@ -1,5 +1,5 @@
 from numpy import vectorize
-from source.data_manipulation import songs_organisers, text_cleaning
+from source.data_manipulation import songs_organisers, text_cleaning, is_french_lyric
 
 import numpy as np
 import pandas as pd
@@ -12,7 +12,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 
-from lightpredict import LightClassifier
+# from lightpredict import LightClassifier
 # nltk.download('punkt')
 
 LYRICS_FOLDER_RAP = "data/Lyrics/Rap"
@@ -25,6 +25,7 @@ df_songs_parap = songs_organisers(LYRICS_FOLDER_PARAP)
 # Data Cleaning
 df_songs_rap["Lyrics"] = df_songs_rap["Lyrics"].apply(text_cleaning)
 df_songs_parap["Lyrics"] = df_songs_parap["Lyrics"].apply(text_cleaning)
+df_songs_rap = df_songs_rap.loc[df_songs_rap["Lyrics"].apply(is_french_lyric) ]
 
 df_songs_rap["Genre"] = 1
 df_songs_parap["Genre"] = 0
